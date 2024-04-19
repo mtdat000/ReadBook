@@ -13,6 +13,12 @@
         <a href="/"><img class="w-20" src="{{asset('logo.png')}}" alt="" class="logo" /></a>
         @if (Route::has('login'))
             <nav class=" flex flex-1 justify-end">
+                <a
+                href="/book/create"
+                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                >
+                    Upload
+                </a>
                 @auth
                     <a
                         href="{{ url('/dashboard') }}"
@@ -21,6 +27,7 @@
                         Dashboard
                     </a>
                 @else
+
                     <a
                         href="{{ route('login') }}"
                         class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"

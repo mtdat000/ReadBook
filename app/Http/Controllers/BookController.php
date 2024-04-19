@@ -13,8 +13,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        // dd(Book::all());
-        return view('home', ['books'=> Book::all()]);
+        // dd(Book::all()->sortByDesc('created_at'));
+        return view('home', ['books'=> Book::all()->sortByDesc('created_at')]);
     }
 
     /**
@@ -22,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -30,7 +30,21 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        $formFields = $request->validate([
+            'title' => 'required',
+            'author'=> 'required',
+            'year_published' => 'required'
+        ]);
+
+        $formFields['synopsis'] = $request->input('synopsis');
+
+        if($request->hasFile('cover')) {
+            $formFields['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
+        Book::create($formFields);
+
+        return back();
     }
 
     /**

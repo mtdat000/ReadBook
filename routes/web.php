@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index']);
 
+Route::get('/book/create', [BookController::class, 'create']);
+
+Route::post('/book/create', [BookController::class, 'store']);
+
 Route::get('/book/{book}', [BookController::class, 'show']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
