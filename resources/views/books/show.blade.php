@@ -1,9 +1,9 @@
 <x-header>
-    <div class="mx-4">
+    <div class="m-5">
         <div class="flex p-6 grid grid-cols-3 gap-5">
-            <div class="">
+            <div>
                 <img class="w-96"
-                    src="/67d556f5-91d4-4b85-b287-2f74f008e564.jpg" alt=""/> 
+                    src="{{$book->cover ? asset('storage/'.$book->cover) : asset('67d556f5-91d4-4b85-b287-2f74f008e564.jpg')}}" alt=""/>
             </div>
             <div class="col-span-2">
                 <h3 class="text-2xl  font-bold">
@@ -15,5 +15,8 @@
                 <div class="text-lg">{{$book->synopsis}}</div>
             </div>
         </div>
+        @auth    
+            <a class="border border-slate-500 rounded ml-5 p-2" href="/book/{{$book->id}}/edit">Edit</a>
+        @endauth
     </div>
 </x-header>

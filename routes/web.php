@@ -10,6 +10,10 @@ Route::get('/book/create', [BookController::class, 'create']);
 
 Route::post('/book/create', [BookController::class, 'store']);
 
+Route::get('/book/{book}/edit', [BookController::class, 'edit']);
+
+Route::post('/book/{book}/edit', [BookController::class, 'uppdate']);
+
 Route::get('/book/{book}', [BookController::class, 'show']);
 
 
