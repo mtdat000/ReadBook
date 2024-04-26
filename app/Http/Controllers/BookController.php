@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -32,7 +34,8 @@ class BookController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             'author'=> 'required',
-            'year_published' => 'required'
+            'year_published' => 'required',
+            'cover' => 'image|max:5120'
         ]);
 
         $formFields['synopsis'] = $request->input('synopsis');
@@ -70,15 +73,19 @@ class BookController extends Controller
         $formFields = $request->validate([
             'title' => 'required',
             'author'=> 'required',
-            'year_published' => 'required'
+            'year_published' => 'required',
+            'cover' => 'image|max:5120'
         ]);
 
         $formFields['synopsis'] = $request->input('synopsis');
 
         if($request->hasFile('cover')) {
+            if($book->cover && Storage::disk('public')->exists($book->cover)) {
+                Storage::disk('public')->delete($book->cover);
+            }
             $formFields['cover'] = $request->file('cover')->store('covers', 'public');
         }
-
+        
         $book->update($formFields);
 
         return back();
@@ -89,6 +96,16 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if(Auth::check()) {
+            if($book->cover && Storage::disk('public')->exists($book->cover)) {
+                Storage::disk('public')->delete($book->cover);
+            }
+
+            $book->delete();
+    
+            return redirect('/')->with('message', 'Book deleted');
+        }
+
+        abort(403, 'Unauthorized Action');
     }
 }

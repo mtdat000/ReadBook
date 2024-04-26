@@ -4,7 +4,7 @@
             <div class="p-6 flex-wrap">
                 <a href="/book/{{$book->id}}">
                     <img class="h-52"
-                        src="{{$book->cover ? asset('storage/'.$book->cover) : asset('67d556f5-91d4-4b85-b287-2f74f008e564.jpg')}}" alt=""/> 
+                        src="{{$book->cover ? asset('storage/'.$book->cover) : asset('No_Cover.jpg')}}" alt=""/> 
                     <h3 class="text-xl font-bold">
                         {{$book->title}}
                     </h3>

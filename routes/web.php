@@ -12,7 +12,9 @@ Route::post('/book/create', [BookController::class, 'store']);
 
 Route::get('/book/{book}/edit', [BookController::class, 'edit']);
 
-Route::post('/book/{book}/edit', [BookController::class, 'uppdate']);
+Route::post('/book/{book}/edit', [BookController::class, 'update']);
+
+Route::get('/book/{book}/delete', [BookController::class, 'destroy']);
 
 Route::get('/book/{book}', [BookController::class, 'show']);
 

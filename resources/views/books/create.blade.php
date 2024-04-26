@@ -9,16 +9,28 @@
             <div class="mb-5">
                 <label class="inline-block mb-2" for="title">Title</label>
                 <input class="border border-gray-300 rounded p-2 w-full" type="text" name="title" value="{{old('title')}}">
+
+                @error('title')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
                 <label class="inline-block mb-2" for="author">Author</label>
                 <input class="border border-gray-300 rounded p-2 w-full" type="text" name="author" value="{{old('author')}}">
+
+                @error('author')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
                 <label class="inline-block mb-2 w-full" for="year_published">Year published</label>
                 <input class="border border-gray-300 rounded p-2" type="number" min="1901" max="2100" step="1" name="year_published" value="{{old('year_published')}}">
+
+                @error('year_published')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -29,6 +41,10 @@
             <div class="mb-5">
                 <label class="inline-block mb-2" for="cover">Cover</label>
                 <input class="border border-gray-300 rounded p-2 w-full" type="file" name="cover">
+
+                @error('cover')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
             </div>
 
             <button type="submit" class="bg-sky-500 rounded font-bold text-white p-2">Submit</button>
