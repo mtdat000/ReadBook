@@ -16,4 +16,9 @@ class Book extends Model
         'synopsis',
         'cover'
     ];
+
+    //Relationship with review 
+    public function reviews() {
+        return $this->hasMany(Review::class, 'book_id');
+    }
 }

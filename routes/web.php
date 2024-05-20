@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index']);
@@ -15,6 +16,10 @@ Route::get('/book/{book}/edit', [BookController::class, 'edit']);
 Route::post('/book/{book}/edit', [BookController::class, 'update']);
 
 Route::get('/book/{book}/delete', [BookController::class, 'destroy']);
+
+Route::get('/book/{book}/review', [BookController::class, 'review']);
+
+Route::post('/book/{book}/review', [ReviewController::class, 'store']);
 
 Route::get('/book/{book}', [BookController::class, 'show']);
 

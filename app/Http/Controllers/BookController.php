@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreBookRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
@@ -107,5 +108,13 @@ class BookController extends Controller
         }
 
         abort(403, 'Unauthorized Action');
+    }
+
+    // Show reviews
+    public function review(Book $book)
+    {
+        $reviews = Review::with('user:id,name')->where('book_id', $book->id)->get()->sortByDesc('created_at');
+        
+        return view('books.review', ['book'=> $book, 'reviews'=> $reviews]);
     }
 }
